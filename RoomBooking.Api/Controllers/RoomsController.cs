@@ -5,7 +5,7 @@ namespace RoomBooking.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoomController(IRoomService roomService) : ControllerBase
+public class RoomsController(IRoomService roomService) : ControllerBase
 {
     [HttpGet]
     public async Task<ActionResult<List<RoomDto>>> Get([FromQuery] RoomFilter filter) 
