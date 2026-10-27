@@ -24,7 +24,6 @@ const emptyForm: ReservationFormValues = {
 interface Props {
   rooms: Room[];
   users: User[];
-  // True means the server accepted the booking; only then clear the title.
   onCreate: (request: CreateReservationRequest) => Promise<boolean>;
 }
 

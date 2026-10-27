@@ -40,7 +40,6 @@ export function ReservationsPage() {
   const [pendingId, setPendingId] = useState<number | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // Fetch room/user options only once per mount. Ignore late responses after unmount.
   useEffect(() => {
     let ignore = false;
     Promise.all([getRooms(), getUsers()])
@@ -53,8 +52,6 @@ export function ReservationsPage() {
     return () => { ignore = true; };
   }, []);
 
-  // Re-fetch on filter changes, manual refresh and every 30 seconds.
-  // 'ignore' prevents a slow, obsolete response from replacing newer results.
   useEffect(() => {
     let ignore = false;
     setLoading(true);
