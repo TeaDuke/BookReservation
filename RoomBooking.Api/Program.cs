@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using RoomBooking.Api.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using RoomBooking.Api.Application.Equipment;
+using RoomBooking.Api.Application.Reports;
 using RoomBooking.Api.Application.Reservation;
 using RoomBooking.Api.Application.Reservation.Rules;
 using RoomBooking.Api.Application.Room;
@@ -13,11 +14,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<BookingOptions>(builder.Configuration.GetSection("Booking"));
 builder.Services.AddSingleton(TimeProvider.System);
 
-builder.Services.AddScoped<IRoomService, RoomService>();
-builder.Services.AddScoped<IEquipmentService, EquipmentService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IReservationService, ReservationService>();
-
 builder.Services.AddScoped<IBookingRule, ValidStartTimeRule>();
 builder.Services.AddScoped<IBookingRule, ValidTimeRangeRule>();
 builder.Services.AddScoped<IBookingRule, MaxDurationRule>();
@@ -27,6 +23,18 @@ builder.Services.AddScoped<IBookingRule, ActiveRoomRule>();
 builder.Services.AddScoped<IBookingRule, RoomOverlapRule>();
 builder.Services.AddScoped<IBookingRule, OrganizerOverlapRule>();
 
+builder.Services.AddScoped<BookingValidator>();
+
+builder.Services.Configure<ReportOptions>(builder.Configuration.GetSection("Report"));
+builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IEquipmentService, EquipmentService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IReservationService, ReservationService>();
+
+builder.Services.AddExceptionHandler<BookingExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddControllers()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -35,6 +43,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseInMemoryDatabase("RoomBooking"));
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 using (var scope = app.Services.CreateScope())
 {
