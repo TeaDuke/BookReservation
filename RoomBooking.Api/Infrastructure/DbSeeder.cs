@@ -52,6 +52,70 @@ public static class DbSeeder
             {
                 Room = m1, Organizer = slava, Title = "Demo", StartDate = now.AddDays(2),
                 EndDate = now.AddDays(2).AddHours(1), Attendees = 7, Status = ReservationStatus.Booked
+            },
+
+            new Reservation
+            {
+                Room = m1, Organizer = rokas, Title = "Quarterly planning",
+                StartDate = now.AddDays(-20), EndDate = now.AddDays(-20).AddHours(2),
+                Attendees = 5, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m2, Organizer = slava, Title = "Sales review",
+                StartDate = now.AddDays(-15), EndDate = now.AddDays(-15).AddHours(3),
+                EndedAt = now.AddDays(-15).AddMinutes(55),
+                Attendees = 8, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m3, Organizer = anna, Title = "Design workshop",
+                StartDate = now.AddDays(-12), EndDate = now.AddDays(-12).AddMinutes(90),
+                Attendees = 4, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m1, Organizer = anna, Title = "Product discovery",
+                StartDate = now.AddDays(-10), EndDate = now.AddDays(-10).AddMinutes(150),
+                EndedAt = now.AddDays(-10).AddHours(1),
+                Attendees = 6, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m2, Organizer = rokas, Title = "Client sync",
+                StartDate = now.AddDays(-8), EndDate = now.AddDays(-8).AddHours(1),
+                Attendees = 6, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m3, Organizer = slava, Title = "Team retrospective",
+                StartDate = now.AddDays(-6), EndDate = now.AddDays(-6).AddHours(1),
+                Attendees = 3, Status = ReservationStatus.Completed
+            },
+            new Reservation
+            {
+                Room = m1, Organizer = rokas, Title = "Cancelled offsite",
+                StartDate = now.AddDays(-5), EndDate = now.AddDays(-5).AddHours(2),
+                Attendees = 7, Status = ReservationStatus.Cancelled
+            },
+            new Reservation
+            {
+                Room = m2, Organizer = anna, Title = "Cancelled budget sync",
+                StartDate = now.AddDays(-4), EndDate = now.AddDays(-4).AddMinutes(90),
+                Attendees = 5, Status = ReservationStatus.Cancelled
+            },
+
+            new Reservation
+            {
+                Room = m1, Organizer = anna, Title = "Live sprint planning",
+                StartDate = now.AddMinutes(-25), EndDate = now.AddHours(2),
+                Attendees = 6, Status = ReservationStatus.Booked
+            },
+            new Reservation
+            {
+                Room = m2, Organizer = rokas, Title = "Live client meeting",
+                StartDate = now.AddMinutes(-10), EndDate = now.AddMinutes(90),
+                Attendees = 8, Status = ReservationStatus.Booked
             }
         };
         
